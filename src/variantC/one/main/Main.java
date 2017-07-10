@@ -1,30 +1,31 @@
 package variantC.one.main;
 
-import java.util.Scanner;
 import variantC.one.action.Action;
+import variantC.one.action.InputData;
+import variantC.one.action.OutputData;
 
 
+/**
+ *
+ * @author Sukhocheva Maryana
+ */
 public class Main {
     
     public static void main(String[] args) {
-     
-        //Matrix matr=new Matrix(2,2);
-        Action action = new Action();
-      //  int n = action.getRandom(2, 10);
-        System.out.print("Введите размерность матрицы n =" );
-        Scanner scan = new Scanner(System.in);
-        int n;
-        try {  
-            n=scan.nextInt();
-            int[][] a =action.createMatrix(n); 
-            System.out.println("--------Created Matrix (Random)--------");
-            action.outputMatrix(n,a);
-            action.sortedMatrix(n, a);
-            System.out.println("--------New Matrix--------");
-            action.outputMatrix(n,a);
-         } catch(NumberFormatException e) {
-            System.out.println("Число введено некорректно!!!");
-            
+        
+        InputData inputParametrs = new InputData();
+        int n = inputParametrs.inputParametr("Введите размерность матрицы n");
+        int k = inputParametrs.inputParametr("Введите номер столбца k");
+        if (k < n) {
+            Action action = new Action();
+            int[][] arrayOfMatrix = action.createMatrix(n); 
+            OutputData.printlnMsg("--------Created Matrix (Random)--------");
+            OutputData.outputMatrix(n,arrayOfMatrix);
+            action.sortedMatrix(n,k, arrayOfMatrix);
+            OutputData.printlnMsg("--------New Matrix--------");
+            OutputData.outputMatrix(n,arrayOfMatrix);
+        } else {
+            OutputData.printErr("Номер столбца больше чем размерность матрицы");
         }
     }
 

@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package variantC.one.action;
 
 import java.util.Random;
 
 /**
  *
- * @author SLAVA
+ * @author Sukhocheva Maryana
  */
 public class Action {
      public Action() {
 
     }
     public int[][] createMatrix(int n) {
-         int[][] a = new int[n][n];
-        
+        int[][] a = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 a[i][j] = getRandom(-n, n);
@@ -27,34 +22,32 @@ public class Action {
     }
     
     public static int getRandom(int min, int max) {
-		Random ran = new Random();
-		int n = max - min + 1;
-		int i = ran.nextInt() % n;
-		if (i < 0) {
-                        i = -i;
-                    }
-		return min + i;
-	}
-     public void outputMatrix(int n, int[][] a){
-     for (int i = 0; i < n; i++) {
-	for (int j = 0; j < n; j++) {
-	System.out.print(a[i][j] + "\t");
-			}
-			System.out.println();
-		}
-     }
-    
-     public void sortedMatrix(int n, int[][] a){
-         int q=0;
-         for (int i = 0; i < n * n - 1; i++) {
-            for (int j = i; j < n * n; j++) {
-                if (a[(int) i / n][(int) i % n] > a[(int) j / n][(int) j % n]) {
-                    q = a[(int) i / n][(int) i % n];
-                    a[(int) i / n][(int) i % n] = a[(int) j / n][(int) j % n];
-                    a[(int) j / n][(int) j % n] = q;
-                }
+	Random ran = new Random();
+	int n = max - min + 1;
+	int i = ran.nextInt() % n;
+	if (i < 0) {
+               i = -i;
             }
+	return min + i;
+	}
+    
+     
+    
+     public void sortedMatrix(int n, int k, int[][] arrayOfMatrix){
+            for (int i=0;  i<n; i++) {
+             for (int q=i+1; q < n; q++) {
+                 if (arrayOfMatrix[i][k-1] > arrayOfMatrix[q][k-1]){ //сравниваю значения i-той строки в 
+                     //k-м столбце со значением q-той строки в k-м столбце
+                     for (int j=0; j < n; j++) {
+                         int temp = arrayOfMatrix[i][j]; 
+                         arrayOfMatrix[i][j]=arrayOfMatrix[q][j]; //если больше переставляем значения строк
+                         arrayOfMatrix[q][j]=temp;
+                     }
+                 }
+             }
+         }
+         
+         
         }
-     }
      
 }
